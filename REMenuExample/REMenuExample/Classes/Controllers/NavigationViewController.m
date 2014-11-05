@@ -72,7 +72,12 @@
                                                              NSLog(@"Item: %@", item);
                                                              ProfileViewController *controller = [[ProfileViewController alloc] init];
                                                              [weakSelf setViewControllers:@[controller] animated:NO];
-                                                         }];
+                                                         }
+                                                    longTapAction:^(REMenuItem *item) {
+                                                        NSLog(@"longTapAction Item: %@", item);
+                                                        ProfileViewController *controller = [[ProfileViewController alloc] init];
+                                                        [weakSelf setViewControllers:@[controller] animated:NO];
+                                                    }];
     
     // You can also assign a custom view for any particular item
     // Uncomment the code below and add `customViewItem` to `initWithItems` array, for example:

@@ -56,11 +56,15 @@
 @property (strong, readwrite, nonatomic) UIImage *image;
 @property (strong, readwrite, nonatomic) UIImage *highlightedImage;
 @property (copy, readwrite, nonatomic) void (^action)(REMenuItem *item);
+@property (copy, readwrite, nonatomic) void (^longTapAction)(REMenuItem *item);
 @property (assign, readwrite, nonatomic) NSInteger tag;
 @property (strong, readwrite, nonatomic) UIView *customView;
 
 - (id)initWithTitle:(NSString *)title image:(UIImage *)image highlightedImage:(UIImage *)highlightedImage action:(void (^)(REMenuItem *item))action;
+- (id)initWithTitle:(NSString *)title image:(UIImage *)image highlightedImage:(UIImage *)highlightedImage action:(void (^)(REMenuItem *item))action longTapAction:(void (^)(REMenuItem *item))longTapAction;
 - (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image highlightedImage:(UIImage *)highlightedImage action:(void (^)(REMenuItem *item))action;
+- (id)initWithTitle:(NSString *)title subtitle:(NSString *)subtitle image:(UIImage *)image highlightedImage:(UIImage *)highlightedImage action:(void (^)(REMenuItem *item))action longTapAction:(void (^)(REMenuItem *item))longTapAction;
+- (id)initWithCustomView:(UIView *)customView action:(void (^)(REMenuItem *item))action longTapAction:(void (^)(REMenuItem *item))longTapAction;
 - (id)initWithCustomView:(UIView *)customView action:(void (^)(REMenuItem *item))action;
 - (id)initWithCustomView:(UIView *)customView;
 - (void)setNeedsLayout;

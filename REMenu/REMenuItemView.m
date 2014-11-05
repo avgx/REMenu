@@ -103,8 +103,35 @@
         [self addSubview:_titleLabel];
         [self addSubview:_imageView];
         [self addSubview:_badgeLabel];
+
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longTapped:)];
+        longPress.minimumPressDuration = 2.0f;
+        [self addGestureRecognizer:longPress];
     }
     return self;
+}
+
+- (void)longTapped:(UILongPressGestureRecognizer*)gesture
+{
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+
+        if (!self.menu.closeOnSelection) {
+            if (self.item.longTapAction)
+                self.item.longTapAction(self.item);
+        } else {
+            if (self.item.longTapAction) {
+                if (self.menu.waitUntilAnimationIsComplete) {
+                    __typeof (&*self) __weak weakSelf = self;
+                    [self.menu closeWithCompletion:^{
+                        weakSelf.item.longTapAction(weakSelf.item);
+                    }];
+                } else {
+                    [self.menu close];
+                    self.item.longTapAction(self.item);
+                }
+            }
+        }
+    }
 }
 
 - (void)layoutSubviews
